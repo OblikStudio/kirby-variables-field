@@ -1,11 +1,17 @@
 <template>
   <div>
     <k-text-field v-model="variableValue" @input="input" name="text" v-bind:label="displayLabel" />
+    <JsonEditor v-model="mydata"></JsonEditor>
   </div>
 </template>
 
 <script>
+import JsonEditor from './JsonEditor.vue'
+
 export default {
+  components: {
+    JsonEditor
+  },
   props: {
     value: Object,
     endpoints: Object,
@@ -17,7 +23,19 @@ export default {
   data () {
     return {
       diskValue: null,
-      variableValue: null
+      variableValue: null,
+      mydata: {
+        foo: 'bar',
+        testing: 'three',
+        nested: {
+          qux: 'flux'
+        }
+      }
+      // mydata: [
+      //   'test',
+      //   'var',
+      //   'baz'
+      // ]
     }
   },
   computed: {
