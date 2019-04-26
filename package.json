@@ -1,0 +1,26 @@
+{
+	"name": "kirby-variables-field",
+	"version": "0.1.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"dev": "webpack --watch --mode=development"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/OblikStudio/kirby-variables-field.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/OblikStudio/kirby-variables-field/issues"
+	},
+	"homepage": "https://github.com/OblikStudio/kirby-variables-field#readme",
+	"devDependencies": {
+		"vue": "^2.6.10",
+		"vue-loader": "^15.7.0",
+		"vue-template-loader": "^1.0.0",
+		"webpack": "^4.30.0",
+		"webpack-cli": "^3.3.1"
+	}
+}
