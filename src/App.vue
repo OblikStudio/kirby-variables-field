@@ -1,12 +1,28 @@
 <template>
   <div>
-    <k-text-field v-model="variableValue" @input="input" name="text" v-bind:label="displayLabel" />
-    <JsonEditor v-model="mydata"></JsonEditor>
+    <k-info-field v-if="!initialLoad" :label="label" :text="$t('loading') + '&hellip;'" theme="info" />
+    <k-info-field v-else-if="error" :label="label" :text="error" theme="negative" />
+    <template v-else>
+      <JsonEditor
+        v-if="variableValue && typeof variableValue === 'object'"
+        :name="label"
+        :value="variableValue"
+        :options="jsonOptions"
+        @input="input"
+      ></JsonEditor>
+      <k-text-field
+        v-else
+        :label="label"
+        :value="variableValue"
+        @input="input"
+        name="text"
+      />
+    </template>
   </div>
 </template>
 
 <script>
-import JsonEditor from './JsonEditor.vue'
+import JsonEditor from './editor/JsonEditor.vue'
 
 export default {
   components: {
@@ -18,41 +34,37 @@ export default {
 
     variable: String,
     label: String,
-    name: String
+    name: String,
+
+    editable: Boolean,
+    resizable: Boolean,
+    sortable: Boolean,
+    keys: Boolean
   },
   data () {
     return {
+      error: null,
+      initialLoad: false,
       diskValue: null,
       variableValue: null,
-      mydata: {
-        foo: 'bar',
-        testing: 'three',
-        nested: {
-          qux: 'flux'
-        }
+      jsonOptions: {
+        isEditable: this.editable,
+        isResizable: this.resizable,
+        isSortable: this.sortable,
+        isKeysEditable: this.keys
       }
-      // mydata: [
-      //   'test',
-      //   'var',
-      //   'baz'
-      // ]
     }
   },
   computed: {
     language () {
       return this.$store.state.languages.current.code
-    },
-    displayLabel () {
-      return (this.label.toLowerCase() === this.name)
-        ? this.variable
-        : this.label
     }
   },
   methods: {
     input (value) {
       this.variableValue = value
 
-      if (this.variableValue !== this.diskValue) {
+      if (JSON.stringify(this.variableValue) !== JSON.stringify(this.diskValue)) {
         this.$emit('input', {
           lang: this.language,
           value: this.variableValue
@@ -63,28 +75,46 @@ export default {
       }
     },
     fetchValue () {
-      return this.$api.get(this.endpoints.field + '/variable', {
-        lang: this.language,
-        key: this.variable
-      }).then(data => {
+      var query = {
+        lang: this.language
+      }
+
+      if (this.variable) {
+        query.key = this.variable
+      }
+
+      return this.$api.get(this.endpoints.field + '/variables', query).then(function (data) {
+        data = data || {} // use an Object in JSON editor when no variables available
         this.diskValue = data
         this.variableValue = data
-      }).catch(error => {
-        // variable not found
-      })
+
+        if (this.value) {
+          // If there's an initial value, then there was an unsaved change.
+          this.variableValue = this.value.value
+        }
+      }.bind(this)).catch(function (error) {
+        this.error = 'Could not find variable: ' + query.key
+      }.bind(this)).then(function () {
+        this.initialLoad = true
+      }.bind(this))
     }
   },
-  created () {
-    this.fetchValue()
-  },
   watch: {
-    value (value) {
-      // Since this is a fake field, it always has no value, I.E. null.
-      // Whenever the value changes to null, this means the field is either
-      // reverted or saved.
-      if (value === null) {
-        this.fetchValue()
+    value: {
+      immediate: true,
+      handler: function (value) {
+        // Since this is a fake field, it always has no value, I.E. null.
+        // Whenever the value changes to null, this means the field is either
+        // reverted or saved.
+        if (value === null) {
+          this.fetchValue()
+        } else {
+          this.variableValue = value.value // load unsaved value
+        }
       }
+    },
+    language: function (value) {
+      this.fetchValue()
     }
   }
 }

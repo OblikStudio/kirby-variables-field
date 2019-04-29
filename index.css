@@ -1,3 +1,32 @@
 .k-je-column-header-key {
 	width: 25%;
 }
+
+.k-je-foot {
+	background: #fafafa;
+	text-align: center;
+}
+
+.k-je-foot .k-radio-input li {
+	display: inline-block;
+	margin-right: 25px;
+}
+
+.k-je-not-editable {
+	cursor: default;
+	color: #777;
+}
+
+.k-je-foot td {
+	border-top: 1px solid #efefef;
+}
+
+.k-je-not-allowed {
+	cursor: not-allowed;
+}
+
+.k-je-separator {
+	content: '/';
+	margin: 0 8px;
+	font-weight: lighter;
+}

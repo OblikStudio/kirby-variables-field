@@ -9,36 +9,52 @@ Kirby::plugin('oblik/variables-field', [
 					if ($data) {
 						$data = yaml::decode($data);
 						$lang = $data['lang'];
+						$value = $data['value'];
 
-						// Put the data in an inflated array so it can be merged.
-						$inflated = Handler::inflate([
-							$this->variable => $data['value']
-						]);
+						if (!empty($this->variable)) {
+							$variables = Handler::read($lang);
+							Handler::replaceKey($this->variable, $value, $variables);
+						} else {
+							$variables = $value;
+						}
 
-						Handler::modify($lang, $inflated);
+						Handler::write($lang, $variables);
 					}
 
 					// Always return null to avoid saving the field value in the txt.
 					return null;
 				},
-				'variable' => function ($value) {
+				'variable' => function ($value = null) {
+					return $value;
+				},
+				'editable' => function ($value = true) {
+					return $value;
+				},
+				'sortable' => function ($value = true) {
+					return $value;
+				},
+				'resizable' => function ($value = false) {
+					return $value;
+				},
+				'keys' => function ($value = false) {
 					return $value;
 				}
 			],
 			'api' => function () {
 				return [
 					[
-						'pattern' => '/variable',
+						'pattern' => '/variables',
 						'method' => 'GET',
 						'action' => function () {
+							$key = $_GET['key'] ?? null;
 							$data = Handler::read($_GET['lang']);
 
-							if ($data) {
-								$value = Handler::find($_GET['key'], $data);
+							if ($data && $key) {
+								$data = Handler::find($key, $data);
+							}
 
-								if ($value !== null) {
-									return json_encode($value);
-								}
+							if ($data !== null) {
+								return json_encode($data);
 							}
 
 							return false;
@@ -47,5 +63,15 @@ Kirby::plugin('oblik/variables-field', [
 				];
 			}
 		]
-	]
+	],
+	'translations' => [
+    'en' => [
+    	'key' => 'Key',
+    	'value' => 'Value',
+      'array' => 'Array',
+      'object' => 'Object',
+      'loading' => 'Loading',
+      'values' => 'values',
+    ]
+  ]
 ]);
