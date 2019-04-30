@@ -2,7 +2,7 @@
   <div>
     <table
       class="k-structure-table"
-      :data-sortable="options.isSortable ? 'true' : false"
+      :data-sortable="settings.isSortable ? 'true' : false"
     >
       <thead v-if="list.length">
         <tr>
@@ -21,7 +21,7 @@
       >
         <tr v-for="(entry, index) in list" :key="index">
           <td class="k-structure-table-index">
-            <k-sort-handle v-if="options.isSortable" />
+            <k-sort-handle v-if="settings.isSortable" />
             <span class="k-structure-table-index-number">
               {{ index + 1 }}
             </span>
@@ -29,19 +29,19 @@
 
           <td class="k-structure-table-column">
             <p class="k-structure-table-text" :class="{
-              'k-je-not-editable': !options.isKeysEditable
+              'k-je-not-editable': !settings.isKeysEditable
             }">
-              <k-input v-if="options.isKeysEditable" v-model="entry.key" name="text" type="text" />
+              <k-input v-if="settings.isKeysEditable" v-model="entry.key" name="text" type="text" />
               <span v-else>{{ entry.key }}</span>
             </p>
           </td>
 
           <td class="k-structure-table-column">
             <p class="k-structure-table-text" :class="{
-              'k-je-not-editable': !options.isEditable
+              'k-je-not-editable': !settings.isValuesEditable
             }">
               <template v-if="!entry.value || typeof entry.value !== 'object'">
-                <k-input v-if="options.isEditable" v-model="entry.value" name="text" type="text" />
+                <k-input v-if="settings.isValuesEditable" v-model="entry.value" name="text" type="text" />
                 <span v-else>{{ entry.value }}</span>
               </template>
               <k-button v-else icon="open" @click="$emit('open', entry.key)">
@@ -57,14 +57,14 @@
               icon="remove"
               @click="remove(entry.key)"
               :class="{
-                'k-je-not-allowed': !options.isResizable
+                'k-je-not-allowed': !settings.isMutatable
               }"
             />
           </td>
         </tr>
       </k-draggable>
 
-      <Foot v-if="options.isResizable" @add="add" :colspan="2"></Foot>
+      <Foot v-if="settings.isMutatable" @add="add" :colspan="2"></Foot>
     </table>
   </div>
 </template>

@@ -27,17 +27,13 @@ Kirby::plugin('oblik/variables-field', [
 				'variable' => function ($value = null) {
 					return $value;
 				},
-				'editable' => function ($value = true) {
-					return $value;
-				},
-				'sortable' => function ($value = true) {
-					return $value;
-				},
-				'resizable' => function ($value = false) {
-					return $value;
-				},
-				'keys' => function ($value = false) {
-					return $value;
+				'editor' => function ($value = []) {
+					return array_replace([
+						'keys' => false,
+						'values' => true,
+						'mutate' => true,
+						'sort' => true
+					], $value);
 				}
 			],
 			'api' => function () {

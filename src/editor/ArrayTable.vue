@@ -2,7 +2,7 @@
   <div>
     <table
       class="k-structure-table"
-      :data-sortable="options.isSortable ? 'true' : false"
+      :data-sortable="settings.isSortable ? 'true' : false"
     >
       <thead v-if="list.length">
         <tr>
@@ -20,7 +20,7 @@
       >
         <tr v-for="(entry, index) in list" :key="entry.key">
           <td class="k-structure-table-index">
-            <k-sort-handle v-if="options.isSortable" />
+            <k-sort-handle v-if="settings.isSortable" />
             <span class="k-structure-table-index-number">
               {{ index }}
             </span>
@@ -28,10 +28,10 @@
 
           <td class="k-structure-table-column">
             <p class="k-structure-table-text" :class="{
-              'k-je-not-editable': !options.isEditable
+              'k-je-not-editable': !settings.isValuesEditable
             }">
               <template v-if="!entry.value || typeof entry.value !== 'object'">
-                <k-input v-if="options.isEditable" v-model="entry.value" name="text" type="text" />
+                <k-input v-if="settings.isValuesEditable" v-model="entry.value" name="text" type="text" />
                 <span v-else>{{ entry.value }}</span>
               </template>
               <k-button v-else icon="open" @click="$emit('open', entry.key)">
@@ -47,14 +47,14 @@
               icon="remove"
               @click="remove(entry.key)"
               :class="{
-                'k-je-not-allowed': !options.isResizable
+                'k-je-not-allowed': !settings.isMutatable
               }"
             />
           </td>
         </tr>
       </k-draggable>
 
-      <Foot v-if="options.isResizable" @add="add"></Foot>
+      <Foot v-if="settings.isMutatable" @add="add"></Foot>
     </table>
   </div>
 </template>
@@ -68,7 +68,7 @@ export default {
   },
   props: {
     value: Object,
-    options: Object
+    settings: Object
   },
   data: function () {
     return {
@@ -79,7 +79,7 @@ export default {
   computed: {
     dragOptions: function () {
       return {
-        disabled: !this.options.isSortable,
+        disabled: !this.settings.isSortable,
         fallbackClass: 'k-sortable-row-fallback'
       }
     }
@@ -119,12 +119,12 @@ export default {
         case 'object': entry.value = {}; break
       }
 
-      if (this.options.isResizable) {
+      if (this.settings.isMutatable) {
         this.list.push(entry)
       }
     },
     remove: function (key) {
-      if (this.options.isResizable) {
+      if (this.settings.isMutatable) {
         this.list = this.list.filter(function (item) {
           return item.key !== key
         })

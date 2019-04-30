@@ -7,7 +7,7 @@
         v-if="variableValue && typeof variableValue === 'object'"
         :name="label"
         :value="variableValue"
-        :options="jsonOptions"
+        :options="editorOptions"
         @input="input"
       ></JsonEditor>
       <k-text-field
@@ -33,6 +33,7 @@ export default {
     endpoints: Object,
 
     variable: String,
+    editor: Object,
     label: String,
     name: String,
 
@@ -47,11 +48,11 @@ export default {
       initialLoad: false,
       diskValue: null,
       variableValue: null,
-      jsonOptions: {
-        isEditable: this.editable,
-        isResizable: this.resizable,
-        isSortable: this.sortable,
-        isKeysEditable: this.keys
+      editorOptions: {
+        isKeysEditable: this.editor.keys,
+        isValuesEditable: this.editor.values,
+        isMutatable: this.editor.mutate,
+        isSortable: this.editor.sort
       }
     }
   },

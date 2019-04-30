@@ -6,7 +6,8 @@
           <template v-if="entry.index < path.length - 1">
             <button class="k-je-label-button" @click="openPath(entry.index)">
               {{ entry.name }}
-            </button><span class="k-je-separator">/</span>
+            </button>
+            <span class="k-je-separator">/</span>
           </template>
           <span v-else>{{ entry.name }}</span>
         </template>
@@ -15,7 +16,7 @@
 
     <component
       :is="isArray(currentObject) ? 'ArrayTable' : 'ObjectTable'"
-      :options="options"
+      :settings="settings"
       :value="currentObject"
       @input="input"
       @open="openKey"
@@ -28,6 +29,13 @@ import { cloneDeep, get } from 'lodash'
 import ObjectTable from './ObjectTable.vue'
 import ArrayTable from './ArrayTable.vue'
 
+var defaults = {
+  isKeysEditable: true,
+  isValuesEditable: true,
+  isMutatable: true,
+  isSortable: true
+}
+
 export default {
   components: {
     ObjectTable,
@@ -35,25 +43,17 @@ export default {
   },
   props: {
     value: Object,
-    resizable: Boolean,
+    options: Object,
     name: {
       type: String,
       default: 'Root'
-    },
-    options: {
-      type: Object,
-      default: {
-        isEditable: true,
-        isResizable: true,
-        isSortable: true,
-        isKeysEditable: false
-      }
     }
   },
   data: function () {
     return {
       data: null,
-      path: []
+      path: [],
+      settings: Object.assign({}, defaults, this.options)
     }
   },
   computed: {
