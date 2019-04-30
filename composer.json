@@ -10,6 +10,7 @@
     }
   ],
   "require": {
+    "getkirby/composer-installer": "^1.1",
     "oblik/kirby-easyvars": "^1.0"
   },
   "extra": {
