@@ -11,5 +11,8 @@
 	],
 	"require": {
 		"oblik/kirby-easyvars": "^1.0"
-	}
+	},
+  "extra": {
+    "installer-name": "variables-field"
+  }
 }
