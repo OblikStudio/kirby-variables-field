@@ -1,17 +1,17 @@
 {
-	"name": "oblik/kirby-variables-field",
-	"description": "Panel field that allows you to change language variables.",
-	"type": "kirby-plugin",
-	"license": "MIT",
-	"authors": [
-		{
-			"name": "Hristiyan Dodov",
-			"email": "h.dodov@gmail.com"
-		}
-	],
-	"require": {
-		"oblik/kirby-easyvars": "^1.0"
-	},
+  "name": "oblik/kirby-variables-field",
+  "description": "Panel field that allows you to change language variables.",
+  "type": "kirby-plugin",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Hristiyan Dodov",
+      "email": "h.dodov@gmail.com"
+    }
+  ],
+  "require": {
+    "oblik/kirby-easyvars": "^1.0"
+  },
   "extra": {
     "installer-name": "variables-field"
   }
