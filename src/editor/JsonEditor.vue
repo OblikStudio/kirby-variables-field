@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { cloneDeep, get } from 'lodash'
+import { cloneDeep, get } from 'lodash-es'
 import ObjectTable from './ObjectTable.vue'
 import ArrayTable from './ArrayTable.vue'
 

@@ -1,28 +1,28 @@
 {
-	"name": "kirby-variables-field",
-	"version": "1.0.0",
-	"description": "Panel field that allows you to change language variables.",
-	"main": "index.js",
-	"scripts": {
-		"dev": "webpack --watch --mode=development"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/OblikStudio/kirby-variables-field.git"
-	},
-	"author": "",
-	"license": "ISC",
-	"bugs": {
-		"url": "https://github.com/OblikStudio/kirby-variables-field/issues"
-	},
-	"homepage": "https://github.com/OblikStudio/kirby-variables-field#readme",
-	"devDependencies": {
-		"vue-loader": "^15.7.0",
-		"webpack": "^4.30.0",
-		"webpack-cli": "^3.3.1"
-	},
-	"dependencies": {
-		"vue": "^2.6.10",
-		"lodash": "^4.17.11"
-	}
+  "name": "kirby-variables-field",
+  "version": "1.0.0",
+  "description": "Panel field that allows you to change language variables.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack --watch --mode=development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OblikStudio/kirby-variables-field.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OblikStudio/kirby-variables-field/issues"
+  },
+  "homepage": "https://github.com/OblikStudio/kirby-variables-field#readme",
+  "devDependencies": {
+    "vue-loader": "^15.7.0",
+    "webpack": "^4.30.0",
+    "webpack-cli": "^3.3.1"
+  },
+  "dependencies": {
+    "lodash-es": "^4.17.11",
+    "vue": "^2.6.10"
+  }
 }
