@@ -11,7 +11,7 @@
   ],
   "require": {
     "getkirby/composer-installer": "^1.1",
-    "oblik/kirby-easyvars": "^1.0"
+    "oblik/kirby-easyvars": "^1.1"
   },
   "extra": {
     "installer-name": "variables-field"

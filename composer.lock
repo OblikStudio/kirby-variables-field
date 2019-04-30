@@ -1,0 +1,90 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "07a69ba73b98a0fcddd70bfe25db63ac",
+    "packages": [
+        {
+            "name": "getkirby/composer-installer",
+            "version": "1.1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/getkirby/composer-installer.git",
+                "reference": "2d6b8f5601a31caeeea45623e1643fbb437eb94e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/getkirby/composer-installer/zipball/2d6b8f5601a31caeeea45623e1643fbb437eb94e",
+                "reference": "2d6b8f5601a31caeeea45623e1643fbb437eb94e",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0"
+            },
+            "require-dev": {
+                "composer/composer": "^1.8",
+                "phpunit/phpunit": "^7.0"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Kirby\\ComposerInstaller\\Plugin"
+            },
+            "autoload": {
+                "psr-4": {
+                    "Kirby\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Kirby's custom Composer installer for the Kirby CMS and for Kirby plugins",
+            "homepage": "https://getkirby.com",
+            "time": "2019-02-11T20:27:36+00:00"
+        },
+        {
+            "name": "oblik/kirby-easyvars",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/OblikStudio/kirby-easyvars.git",
+                "reference": "77634e9565c9b6a73125ac3782ed9a770aff236e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/OblikStudio/kirby-easyvars/zipball/77634e9565c9b6a73125ac3782ed9a770aff236e",
+                "reference": "77634e9565c9b6a73125ac3782ed9a770aff236e",
+                "shasum": ""
+            },
+            "require": {
+                "getkirby/composer-installer": "^1.1"
+            },
+            "type": "kirby-plugin",
+            "extra": {
+                "installer-name": "easyvars"
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Hristiyan Dodov",
+                    "email": "h.dodov@gmail.com"
+                }
+            ],
+            "description": "Easy language variable management for Kirby 3 in YAML files.",
+            "time": "2019-04-29T18:51:36+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}
