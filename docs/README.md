@@ -55,6 +55,20 @@ myfield:
 
 ![Single variable field](field.png)
 
+In the case above, if you want editors to be able to add new entries in the `greetings` group, you can simply change:
+
+```yml
+variable: greetings.hello
+```
+
+...to:
+
+```yml
+variable: greetings
+```
+
+This will show the variable editor instead.
+
 ### `editor`
 
 When you've specified a group of variables to edit and the editor is shown, you can configure it:
