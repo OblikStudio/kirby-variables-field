@@ -12,7 +12,12 @@ module.exports = {
 		rules: [
 			{
 				test: /\.vue$/,
-				use: 'vue-loader'
+				loader: 'vue-loader',
+				options: {
+					compilerOptions: {
+						whitespace: 'condense'
+					}
+				}
 			}
 		]
 	}
