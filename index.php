@@ -60,6 +60,16 @@ Kirby::plugin('oblik/variables-field', [
 			}
 		]
 	],
+	'tags' => [
+		'var' => [
+			'attr' => [
+				'default'
+			],
+			'html' => function ($tag) {
+				return t($tag->value) ?? $tag->default ?? '';
+			}
+		]
+	],
 	'translations' => [
     'en' => [
     	'key' => 'Key',
