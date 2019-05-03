@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <header class="k-field-header">
+  <k-field>
+    <header slot="header" class="k-field-header">
       <label class="k-field-label" @click.prevent="">
         <template v-for="entry in displayPath">
           <template v-if="entry.index < path.length - 1">
@@ -21,7 +21,7 @@
       @input="input"
       @open="openKey"
     ></component>
-  </div>
+  </k-field>
 </template>
 
 <script>
@@ -44,7 +44,7 @@ export default {
   props: {
     value: Object,
     options: Object,
-    name: {
+    label: {
       type: String,
       default: 'Root'
     }
@@ -75,7 +75,7 @@ export default {
       })
 
       path.unshift({
-        name: this.name,
+        name: this.label,
         index: -1
       })
 

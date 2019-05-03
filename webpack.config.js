@@ -1,6 +1,8 @@
+const path = require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
+	entry: path.join(__dirname, 'app', 'index.js'),
 	output: {
 		filename: 'index.js',
 		path: __dirname

@@ -6,23 +6,25 @@ Kirby::plugin('oblik/variables-field', [
 		'variables' => [
 			'props' => [
 				'value' => function ($data = null) {
-					if ($data) {
-						$data = yaml::decode($data);
-						$lang = $data['lang'];
-						$value = $data['value'];
+					$lang = kirby()->language()->code();
 
-						if (!empty($this->variable)) {
-							$variables = Handler::read($lang);
-							Handler::replaceKey($this->variable, $value, $variables);
+					if (!$data) {
+						$data = Handler::read($lang);
+
+						if (!empty($data)) {
+							if ($this->variable) {
+								$data = Handler::find($this->variable, $data);
+							}
 						} else {
-							$variables = $value;
+							if ($this->variable) {
+								$data = '';
+							} else {
+								$data = (object)[];
+							}
 						}
-
-						Handler::write($lang, $variables);
 					}
 
-					// Always return null to avoid saving the field value in the txt.
-					return null;
+					return $data;
 				},
 				'variable' => function ($value = null) {
 					return $value;
@@ -36,48 +38,24 @@ Kirby::plugin('oblik/variables-field', [
 					], $value);
 				}
 			],
-			'api' => function () {
-				return [
-					[
-						'pattern' => '/variables',
-						'method' => 'GET',
-						'action' => function () {
-							$key = $_GET['key'] ?? null;
-							$data = Handler::read($_GET['lang']);
+			'save' => function ($value) {
+				$lang = kirby()->language()->code();
+				$variables = $value;
 
-							if ($data && $key) {
-								$data = Handler::find($key, $data);
-							}
+				if ($this->variable) {
+					$variables = Handler::read($lang);
+					Handler::replaceKey($this->variable, $value, $variables);
+				}
 
-							if ($data !== null) {
-								return json_encode($data);
-							}
-
-							return false;
-						}
-					]
-				];
+				Handler::write($lang, $variables);
+				return null;
 			}
 		]
 	],
 	'tags' => [
-		'var' => [
-			'attr' => [
-				'default'
-			],
-			'html' => function ($tag) {
-				return t($tag->value) ?? $tag->default ?? '';
-			}
-		]
+		'var' => require __DIR__ . DS . 'src' . DS . 'tag.php'
 	],
 	'translations' => [
-    'en' => [
-    	'key' => 'Key',
-    	'value' => 'Value',
-      'array' => 'Array',
-      'object' => 'Object',
-      'loading' => 'Loading',
-      'values' => 'values',
-    ]
-  ]
+		'en' => require __DIR__ . DS . 'localization' . DS . 'en.php'
+	]
 ]);
