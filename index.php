@@ -44,7 +44,7 @@ Kirby::plugin('oblik/variables-field', [
 
 				if ($this->variable) {
 					$variables = Handler::read($lang);
-					Handler::replaceKey($this->variable, $value, $variables);
+					Handler::replaceKey($this->variable, $value, $variables, true);
 				}
 
 				Handler::write($lang, $variables);
