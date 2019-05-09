@@ -7,14 +7,14 @@
 	text-align: center;
 }
 
-.k-je-foot td {
-	border-top: 1px solid #efefef;
-}
+	.k-je-foot td {
+		border-top: 1px solid #efefef;
+	}
 
-.k-je-foot .k-radio-input li {
-	display: inline-block;
-	margin-right: 25px;
-}
+	.k-je-foot .k-radio-input li {
+		display: inline-block;
+		margin-right: 25px;
+	}
 
 .k-je-separator {
 	content: '/';

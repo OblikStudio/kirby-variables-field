@@ -10,7 +10,9 @@
   <k-text-field
     v-else
     v-model="data"
+    icon="wand"
     :label="label"
+    :placeholder="variable"
     @input="emitInput"
   />
 </template>
