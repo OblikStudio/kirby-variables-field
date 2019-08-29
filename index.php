@@ -1,5 +1,7 @@
 <?php
-use Easyvars\Handler;
+
+use Oblik\Variables\Manager;
+use Oblik\Variables\Util;
 
 Kirby::plugin('oblik/variables-field', [
 	'fields' => [
@@ -9,17 +11,18 @@ Kirby::plugin('oblik/variables-field', [
 					$lang = kirby()->language()->code();
 
 					if (!$data) {
-						$data = Handler::read($lang);
+						$handler = Manager::getHandler($lang);
+						$data = $handler->data;
 
 						if (!empty($data)) {
 							if ($this->variable) {
-								$data = Handler::find($this->variable, $data);
+								$data = $handler->find($this->variable);
 							}
 						} else {
 							if ($this->variable) {
 								$data = '';
 							} else {
-								$data = (object)[];
+								$data = [];
 							}
 						}
 					}
@@ -40,14 +43,15 @@ Kirby::plugin('oblik/variables-field', [
 			],
 			'save' => function ($value) {
 				$lang = kirby()->language()->code();
-				$variables = $value;
+				$handler = Manager::getHandler($lang);
 
 				if ($this->variable) {
-					$variables = Handler::read($lang);
-					Handler::replaceKey($this->variable, $value, $variables, true);
+					Util::replace($this->variable, $value, $handler->data, true);
+				} else {
+					$handler->data = $value;
 				}
 
-				Handler::write($lang, $variables);
+				$handler->write();
 				return null;
 			}
 		]
