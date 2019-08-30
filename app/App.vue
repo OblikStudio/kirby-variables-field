@@ -1,11 +1,11 @@
 <template>
-  <JsonEditor
+  <k-json-editor
     v-if="data && typeof data === 'object'"
     v-model="data"
     :label="label"
     :options="editorOptions"
     @input="emitInput"
-  ></JsonEditor>
+  ></k-json-editor>
 
   <k-text-field
     v-else
@@ -19,12 +19,8 @@
 
 <script>
 import { cloneDeep } from 'lodash-es'
-import JsonEditor from './editor/JsonEditor.vue'
 
 export default {
-  components: {
-    JsonEditor
-  },
   props: {
     value: Object,
     endpoints: Object,
@@ -35,7 +31,7 @@ export default {
   },
   data () {
     return {
-      data: cloneDeep(this.value),
+      data: null,
       editorOptions: {
         isKeysEditable: this.editor.keys,
         isValuesEditable: this.editor.values,
@@ -50,8 +46,11 @@ export default {
     }
   },
   watch: {
-    value: function (value) {
-      this.data = cloneDeep(value)
+    value: {
+      immediate: true,
+      handler: function (value) {
+        this.data = cloneDeep(value)
+      }
     }
   }
 }

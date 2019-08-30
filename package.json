@@ -18,6 +18,7 @@
   "homepage": "https://github.com/OblikStudio/kirby-variables-field#readme",
   "devDependencies": {
     "vue-loader": "^15.7.0",
+    "vue-template-compiler": "^2.6.10",
     "webpack": "^4.30.0",
     "webpack-cli": "^3.3.1"
   },
