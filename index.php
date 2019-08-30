@@ -65,8 +65,5 @@ Kirby::plugin('oblik/variables-field', [
                 return t($tag->value) ?? $tag->default ?? '';
             }
         ]
-    ],
-    'translations' => [
-        'en' => include 'localization/en.php'
     ]
 ]);

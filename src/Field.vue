@@ -3,8 +3,8 @@
     v-if="data && typeof data === 'object'"
     v-model="data"
     :label="label"
-    :options="editorOptions"
-    @input="emitInput"
+    :options="options"
+    @input="input"
   ></k-json-editor>
 
   <k-text-field
@@ -13,7 +13,7 @@
     icon="wand"
     :label="label"
     :placeholder="variable"
-    @input="emitInput"
+    @input="input"
   />
 </template>
 
@@ -32,7 +32,7 @@ export default {
   data () {
     return {
       data: null,
-      editorOptions: {
+      options: {
         isKeysEditable: this.editor.keys,
         isValuesEditable: this.editor.values,
         isMutatable: this.editor.mutate,
@@ -41,7 +41,7 @@ export default {
     }
   },
   methods: {
-    emitInput () {
+    input () {
       this.$emit('input', this.data)
     }
   },

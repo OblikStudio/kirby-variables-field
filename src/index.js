@@ -1,7 +1,7 @@
-import App from './App.vue'
+import Field from './Field.vue'
 
 panel.plugin('oblik/variables-field', {
 	fields: {
-		variables: App
+		variables: Field
 	}
 })
