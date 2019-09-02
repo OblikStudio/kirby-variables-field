@@ -1,19 +1,18 @@
 # kirby-variables-field
 
-Field for Kirby 3 that allows you to manage langauge variables via the panel. To do that, it uses [kirby-easyvars](https://github.com/OblikStudio/kirby-easyvars) to put those variables in YAML files so they're easy to work with.
+Kirby field that allows you to manage langauge variables via the panel. To do that, it uses [kirby-variables](https://github.com/OblikStudio/kirby-variables) to put those variables in YAML files so they're easy to work with.
 
 ![Variables editor](editor.png)
 
 ## Installation
 
+With [Composer](https://packagist.org/packages/oblik/kirby-variables-field):
+
 ```
 composer require oblik/kirby-variables-field
 ```
-...or check out the [other plugin installation methods](https://getkirby.com/docs/guide/plugins/plugin-setup-basic#the-three-plugin-installation-methods).
 
 ## Usage
-
-**Important:** Make sure to configure your variables correctly by putting them in YAML files. Read [here](https://github.com/OblikStudio/kirby-easyvars#usage) to learn how.
 
 In a blueprint, simply add a new field and set its type to `variables`:
 
@@ -24,13 +23,11 @@ fields:
     label: Variables
 ```
 
-This will create an editor for all variables where you can add new ones, or remove and sort them.
+This will create an editor for all variables where you can add, remove, and sort them.
 
-**Note:** This is a "fake" field and no actual value will be saved in the site/page txt file. All values are saved in the YAML files provided by easyvars where the variables reside. This means that it doesn't matter what field name you choose for the variables field.
+**Note:** This is a "fake" field and no actual value will be saved in the site/page txt file. All values are saved in the YAML files where the variables reside so it doesn't matter what field name you choose.
 
 ## Options
-
-Before looking at the options, it's recommended to read through the [kirby-easyvars documentation](https://github.com/OblikStudio/kirby-easyvars) to know how it changes the workflow with variables.
 
 ### `variable`
 
@@ -71,7 +68,7 @@ This will show the variable editor instead.
 
 ### `editor`
 
-When you've specified a group of variables to edit and the editor is shown, you can configure it:
+When you haven't set a specific variable to edit and the editor is shown, you can configure it:
 
 ```yml
 myfield:
@@ -81,31 +78,27 @@ myfield:
     mutate: false
 ```
 
-All `editor` options are:
-
-- `keys` whether object keys are editable. Default: `false`.
-- `values` whether values are editable. Default: `true`.
-- `sort` whether you can sort the variables. Default: `true`.
-- `mutate` whether you can add/remove entries. Default: `true`.
+This plugin uses the JSON editor Vue component provided by the [kirby-json](https://github.com/OblikStudio/kirby-json) dependency. Read what blueprint options it has [here](https://github.com/OblikStudio/kirby-json#field).
 
 ## KirbyTag
 
-This field also comes with a KirbyTag, called `var`. It simply outputs a variable with a fallback default value. For example:
+This plugin also comes with a KirbyTag called `var`. It simply outputs a variable with a fallback default value. For example, in _en.yml_:
 
-_en.yml_:
 ```yml
 labels:
   test: Test
 ```
 
 In your content:
+
 ```
 This is the label (var: labels.test default: Default Value)
 ```
 
 Result:
+
 ```
 This is the label Test
 ```
 
-This is useful because editors can create variables and use them in the content, instead of repeating themselves.
+This is useful because editors now can both set _and_ use variables in the panel, which gives them the option to avoid repeating themselves in the content.
