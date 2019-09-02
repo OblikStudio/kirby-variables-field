@@ -49,6 +49,11 @@ export default {
     value: {
       immediate: true,
       handler: function (value) {
+        // Assume that empty arrays should be objects.
+        if (Array.isArray(value) && !value.length) {
+          value = {}
+        }
+
         this.data = cloneDeep(value)
       }
     }

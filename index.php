@@ -10,7 +10,7 @@ Kirby::plugin('oblik/variables-field', [
                 'value' => function ($data = null) {
                     $lang = kirby()->language()->code();
 
-                    if (!$data) {
+                    if ($data === null) {
                         $handler = Manager::getHandler($lang);
                         $data = $handler->data;
 
