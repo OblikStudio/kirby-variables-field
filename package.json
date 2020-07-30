@@ -23,7 +23,7 @@
     "webpack-cli": "^3.3.1"
   },
   "dependencies": {
-    "lodash-es": "^4.17.11",
+    "lodash-es": "^4.17.14",
     "vue": "^2.6.10"
   }
 }
