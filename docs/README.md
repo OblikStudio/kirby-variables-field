@@ -4,6 +4,10 @@ Kirby field that allows you to manage langauge variables via the panel. To do th
 
 ![Variables editor](editor.png)
 
+## ⚠ Deprecated
+
+You gain very little by putting variables in separate files and managing them differently to other fields. It's much easier to just use text fields. For details, check the deprecated [oblik/kirby-variables](https://github.com/OblikStudio/kirby-variables#-deprecated) package.
+
 ## Installation
 
 With [Composer](https://packagist.org/packages/oblik/kirby-variables-field):
